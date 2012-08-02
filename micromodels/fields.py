@@ -46,11 +46,11 @@ class CharField(BaseField):
         Unicode string.
 
         """
-        if self.data is None:
+        try:
+            return unicode(self.data)
+        except (ValueError, TypeError):
             return ''
-        return unicode(self.data)
-
-
+        
 class IntegerField(BaseField):
     """Field to represent an integer value"""
 
@@ -59,9 +59,10 @@ class IntegerField(BaseField):
         integer.
 
         """
-        if self.data is None:
+        try:
+            return int(self.data)
+        except (ValueError, TypeError):
             return 0
-        return int(self.data)
 
 
 class FloatField(BaseField):
@@ -72,11 +73,12 @@ class FloatField(BaseField):
         float.
 
         """
-        if self.data is None:
+        
+        try:
+            return int(self.data)
+        except (ValueError, TypeError):
             return 0.0
-        return float(self.data)
-
-
+                
 class BooleanField(BaseField):
     """Field to represent a boolean"""
 
